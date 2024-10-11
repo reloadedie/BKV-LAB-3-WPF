@@ -1,4 +1,6 @@
-﻿using System.Text;
+﻿using System;
+using System.Reflection;
+using System.Text;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -23,8 +25,6 @@ namespace BKV_LAB_3_WPF
 
         private void Calculate(object sender, RoutedEventArgs e)
         {
-
-            //int fnuminput = Convert.ToInt32(firstNumDouble);
             string _fnuminput = firstNumInput.Text;
             int fnuminput = Convert.ToInt32(_fnuminput);
             firstNumDouble.Content = Convert.ToString(fnuminput, 2);
@@ -33,19 +33,47 @@ namespace BKV_LAB_3_WPF
             int snuminput = Convert.ToInt32(_snuminput);
             secondNumDouble.Content = Convert.ToString(snuminput, 2);
 
-            // int snuminput = Convert.ToInt32(secondNumDouble);
-
             int result = fnuminput + snuminput;
             resultDoubleSystem.Content = Convert.ToString(result, 2); 
 
         }
 
-        #region
-        private void CalculateResult10()
+        private ComboBoxItem selectedTag;
+        public ComboBoxItem SelectedTag
         {
+            get => selectedTag;
+            set
+            {
+                selectedTag = value;
+                CalculateCycle(selectedTag.Tag as string);
 
+            }
         }
 
+        private void CalculateCycle(string index)
+        {
+            switch (index)
+            {
+                case "2":
+                    CalculateResult2();
+                    break;
+
+                case "8":
+                    CalculateResult8();
+                    break;
+
+                case "10":
+                    CalculateResult10();
+                    break;
+
+                case "16":
+                    CalculateResult16();
+                    break;
+
+            }
+        }
+
+        #region
         private void CalculateResult2()
         {
 
@@ -56,6 +84,10 @@ namespace BKV_LAB_3_WPF
 
         }
 
+        private void CalculateResult10()
+        {
+
+        }
         private void CalculateResult16()
         {
 
