@@ -77,7 +77,7 @@
 
                 <StackPanel Height="100">
                     <Label Content="Выберите действие" />
-                    <ComboBox SelectedItem="{Binding SelectedTagAction}">
+                    <ComboBox x:Name="selectedTagAction">
 
                         <ComboBoxItem Content="Сложение"
                                       Tag="21" />

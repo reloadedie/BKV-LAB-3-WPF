@@ -23,8 +23,6 @@ namespace BKV_LAB_3_WPF
             InitializeComponent();
         }
 
-        public int ResultValue { get; set; }
-
         private void Calculate(object sender, RoutedEventArgs e)
         {
             if (firstNumInput.Text == null && secondNumInput.Text == null)
@@ -32,54 +30,27 @@ namespace BKV_LAB_3_WPF
                 MessageBox.Show("Введите числа!");
             }
 
-            string _fnuminput = firstNumInput.Text;
-            int fnuminput = Convert.ToInt32(_fnuminput);
+            if (selectedTagAction != null)
+            {
+                MessageBox.Show("Выберите действие!");
+            }
 
-            string _snuminput = secondNumInput.Text;
-            int snuminput = Convert.ToInt32(_snuminput);
+            int fnuminput = Convert.ToInt32(firstNumInput.Text);
+            int snuminput = Convert.ToInt32(secondNumInput.Text);
 
             ReturnDoubleValue(fnuminput, snuminput);
 
-            int tag = selectedTagAction;
-
-            CheckTypeOperation(selectedTagAction,fnuminput, snuminput);
+            string? _tagAction = Convert.ToString(selectedTagAction.Text);
+            CalculateCycle(_tagAction, fnuminput, snuminput);
         }
-
-
-        /*
         
-
-        private void CheckSystem(string index)
-        {
-            switch (index)
-            {
-                case "2":
-                    CalculateResult2();
-                    break;
-
-                case "8":
-                    CalculateResult8();
-                    break;
-
-                case "10":
-                    CalculateResult10();
-                    break;
-
-                case "16":
-                    CalculateResult16();
-                    break;
-
-            }
-        }
-        */
-
         private void ReturnDoubleValue(int firstNum, int secondNum)
         {
-
             firstNumDouble.Content = Convert.ToString(firstNum, 2);
             secondNumDouble.Content = Convert.ToString(secondNum, 2);
         }
 
+        /*
         private ComboBoxItem selectedTagAction;
         public ComboBoxItem SelectedTagAction
         {
@@ -87,50 +58,36 @@ namespace BKV_LAB_3_WPF
             set
             {
                 selectedTagAction = value;
-                CalculateCycle(selectedTagAction.Tag as string);
+                //CalculateCycle(selectedTagAction.Tag as string);
 
             }
         }
+        */
 
-        private void CalculateCycle(string index)
+        private void CalculateCycle(string tagAction, int firstNum, int secondNum)
         {
-
+            CheckTypeOperation(tagAction, firstNum, secondNum);
+            //ChekSystemOperation();
         }
 
-
-        private ComboBoxItem selectedTagSystem;
-        public ComboBoxItem SelectedTagSystem
+        //"System.Windows.Controls.ComboBoxItem: Сложение"
+        private void CheckTypeOperation(string _tagAction, int firstNum, int secondNum)
         {
-            get => selectedTagSystem;
-            set
+            switch (_tagAction)
             {
-                selectedTagSystem = value;
-                //CheckSystem(selectedTagSystem.Tag as string);
-
-            }
-        }
-        private void CheckTypeOperation(string index, int firstNum, int secondNum)
-        {
-            if (selectedTagAction != null)
-            {
-                MessageBox.Show("Выберите действие!");
-            }
-
-            switch (index)
-            {
-                case "21":
+                case "Сложение":
                     PlusMethod(firstNum, secondNum);
                     break;
 
-                case "22":
+                case "Вычитание":
                     MinusMethod(firstNum, secondNum);
                     break;
 
-                case "23":
+                case "Умножение":
                     MultiplicationMethod(firstNum, secondNum);
                     break;
 
-                case "24":
+                case "Деление":
                     DivisionMethod(firstNum, secondNum);
                     break;
 
