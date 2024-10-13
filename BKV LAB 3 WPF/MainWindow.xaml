@@ -87,6 +87,8 @@
                                       Tag="23" />
                         <ComboBoxItem Content="Деление"
                                       Tag="24" />
+                        <ComboBoxItem Content="Остаток от деления (%)"
+                                      Tag="24" />
                     </ComboBox>
                 </StackPanel>
             </StackPanel>

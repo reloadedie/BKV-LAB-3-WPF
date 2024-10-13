@@ -102,9 +102,7 @@ namespace BKV_LAB_3_WPF
             }
         }
 
-        //расчёт по методам операции
         #region
-        // + конвертировать из string в int значение системы счисления
         private void PlusMethod(int tagSystemInt, int firstNum, int secondNum)
         {
             ResultValueLabel.Content = Convert.ToString(firstNum + secondNum, tagSystemInt);
