@@ -142,8 +142,7 @@
             <TextBlock Text="Выберите систему счисления"
                        TextWrapping="WrapWithOverflow"
                        FontSize="26"/>
-            <ComboBox x:Name="NumSystem"
-                      SelectedItem="{Binding SelectedTagSystem}"
+            <ComboBox x:Name="selectedTagSystem"
                       Margin="0,10,0,0">
                 <ComboBoxItem Content="Двоичная" Tag="2" />
                 <ComboBoxItem Content="Восьмиричная" Tag="8" />

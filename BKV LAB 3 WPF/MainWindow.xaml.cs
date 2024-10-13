@@ -40,8 +40,9 @@ namespace BKV_LAB_3_WPF
 
             ReturnDoubleValue(fnuminput, snuminput);
 
+            string? _tagSystem = Convert.ToString(selectedTagSystem.Text);
             string? _tagAction = Convert.ToString(selectedTagAction.Text);
-            CalculateCycle(_tagAction, fnuminput, snuminput);
+            ChekSystemOperation(_tagAction, _tagSystem, fnuminput, snuminput);
         }
         
         private void ReturnDoubleValue(int firstNum, int secondNum)
@@ -50,45 +51,52 @@ namespace BKV_LAB_3_WPF
             secondNumDouble.Content = Convert.ToString(secondNum, 2);
         }
 
-        /*
-        private ComboBoxItem selectedTagAction;
-        public ComboBoxItem SelectedTagAction
+        private void ChekSystemOperation(string _tagAction, string _tagSystem, int firstNum, int secondNum)
         {
-            get => selectedTagAction;
-            set
+            int tagSystemInt;
+            switch (_tagSystem)
             {
-                selectedTagAction = value;
-                //CalculateCycle(selectedTagAction.Tag as string);
+                case "Двоичная":
+                    tagSystemInt = 2;
+                    CheckTypeOperation(_tagAction, tagSystemInt, firstNum, secondNum);
+                    break;
+
+                case "Восьмиричная":
+                    tagSystemInt = 8;
+                    CheckTypeOperation(_tagAction, tagSystemInt, firstNum, secondNum);
+                    break;
+
+                case "Десятичная":
+                    tagSystemInt = 10;
+                    CheckTypeOperation(_tagAction, tagSystemInt, firstNum, secondNum);
+                    break;
+
+                case "Шестнадцатиричная":
+                    tagSystemInt = 16;
+                    CheckTypeOperation(_tagAction, tagSystemInt, firstNum, secondNum);
+                    break;
 
             }
         }
-        */
 
-        private void CalculateCycle(string tagAction, int firstNum, int secondNum)
-        {
-            CheckTypeOperation(tagAction, firstNum, secondNum);
-            //ChekSystemOperation();
-        }
-
-        //"System.Windows.Controls.ComboBoxItem: Сложение"
-        private void CheckTypeOperation(string _tagAction, int firstNum, int secondNum)
+        private void CheckTypeOperation(string _tagAction, int tagSystemInt, int firstNum, int secondNum)
         {
             switch (_tagAction)
             {
                 case "Сложение":
-                    PlusMethod(firstNum, secondNum);
+                    PlusMethod(tagSystemInt, firstNum, secondNum);
                     break;
 
                 case "Вычитание":
-                    MinusMethod(firstNum, secondNum);
+                    MinusMethod(tagSystemInt, firstNum, secondNum);
                     break;
 
                 case "Умножение":
-                    MultiplicationMethod(firstNum, secondNum);
+                    MultiplicationMethod(tagSystemInt, firstNum, secondNum);
                     break;
 
                 case "Деление":
-                    DivisionMethod(firstNum, secondNum);
+                    DivisionMethod(tagSystemInt, firstNum, secondNum);
                     break;
 
             }
@@ -96,28 +104,28 @@ namespace BKV_LAB_3_WPF
 
         //расчёт по методам операции
         #region
-
-        private void PlusMethod(int firstNum, int secondNum)
+        // + конвертировать из string в int значение системы счисления
+        private void PlusMethod(int tagSystemInt, int firstNum, int secondNum)
         {
-            ResultValueLabel.Content = Convert.ToString(firstNum + secondNum, 10);
+            ResultValueLabel.Content = Convert.ToString(firstNum + secondNum, tagSystemInt);
             resultDoubleSystem.Content = Convert.ToString(firstNum + secondNum, 2);
         }
 
-        private void MinusMethod(int firstNum, int secondNum)
+        private void MinusMethod(int tagSystemInt, int firstNum, int secondNum)
         {
-            ResultValueLabel.Content = Convert.ToString(firstNum - secondNum, 10);
+            ResultValueLabel.Content = Convert.ToString(firstNum - secondNum, tagSystemInt);
             resultDoubleSystem.Content = Convert.ToString(firstNum - secondNum, 2);
         }
 
-        private void MultiplicationMethod(int firstNum, int secondNum)
+        private void MultiplicationMethod(int tagSystemInt, int firstNum, int secondNum)
         {
-            ResultValueLabel.Content = Convert.ToString(firstNum * secondNum, 10);
+            ResultValueLabel.Content = Convert.ToString(firstNum * secondNum, tagSystemInt);
             resultDoubleSystem.Content = Convert.ToString(firstNum * secondNum, 2);
         }
 
-        private void DivisionMethod(int firstNum, int secondNum)
+        private void DivisionMethod(int tagSystemInt, int firstNum, int secondNum)
         {
-            ResultValueLabel.Content = Convert.ToString(firstNum / secondNum, 10);
+            ResultValueLabel.Content = Convert.ToString(firstNum / secondNum, tagSystemInt);
             resultDoubleSystem.Content = Convert.ToString(firstNum / secondNum, 2);
         }
         #endregion
