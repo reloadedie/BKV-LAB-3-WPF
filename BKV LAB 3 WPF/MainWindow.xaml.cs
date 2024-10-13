@@ -23,34 +23,33 @@ namespace BKV_LAB_3_WPF
             InitializeComponent();
         }
 
+        public int ResultValue { get; set; }
+
         private void Calculate(object sender, RoutedEventArgs e)
         {
+            if (firstNumInput.Text == null && secondNumInput.Text == null)
+            {
+                MessageBox.Show("Введите числа!");
+            }
+
             string _fnuminput = firstNumInput.Text;
             int fnuminput = Convert.ToInt32(_fnuminput);
-            firstNumDouble.Content = Convert.ToString(fnuminput, 2);
 
             string _snuminput = secondNumInput.Text;
             int snuminput = Convert.ToInt32(_snuminput);
-            secondNumDouble.Content = Convert.ToString(snuminput, 2);
 
-            int result = fnuminput + snuminput;
-            resultDoubleSystem.Content = Convert.ToString(result, 2); 
+            ReturnDoubleValue(fnuminput, snuminput);
 
+            int tag = selectedTagAction;
+
+            CheckTypeOperation(selectedTagAction,fnuminput, snuminput);
         }
 
-        private ComboBoxItem selectedTag;
-        public ComboBoxItem SelectedTag
-        {
-            get => selectedTag;
-            set
-            {
-                selectedTag = value;
-                CalculateCycle(selectedTag.Tag as string);
 
-            }
-        }
+        /*
+        
 
-        private void CalculateCycle(string index)
+        private void CheckSystem(string index)
         {
             switch (index)
             {
@@ -72,27 +71,98 @@ namespace BKV_LAB_3_WPF
 
             }
         }
+        */
 
+        private void ReturnDoubleValue(int firstNum, int secondNum)
+        {
+
+            firstNumDouble.Content = Convert.ToString(firstNum, 2);
+            secondNumDouble.Content = Convert.ToString(secondNum, 2);
+        }
+
+        private ComboBoxItem selectedTagAction;
+        public ComboBoxItem SelectedTagAction
+        {
+            get => selectedTagAction;
+            set
+            {
+                selectedTagAction = value;
+                CalculateCycle(selectedTagAction.Tag as string);
+
+            }
+        }
+
+        private void CalculateCycle(string index)
+        {
+
+        }
+
+
+        private ComboBoxItem selectedTagSystem;
+        public ComboBoxItem SelectedTagSystem
+        {
+            get => selectedTagSystem;
+            set
+            {
+                selectedTagSystem = value;
+                //CheckSystem(selectedTagSystem.Tag as string);
+
+            }
+        }
+        private void CheckTypeOperation(string index, int firstNum, int secondNum)
+        {
+            if (selectedTagAction != null)
+            {
+                MessageBox.Show("Выберите действие!");
+            }
+
+            switch (index)
+            {
+                case "21":
+                    PlusMethod(firstNum, secondNum);
+                    break;
+
+                case "22":
+                    MinusMethod(firstNum, secondNum);
+                    break;
+
+                case "23":
+                    MultiplicationMethod(firstNum, secondNum);
+                    break;
+
+                case "24":
+                    DivisionMethod(firstNum, secondNum);
+                    break;
+
+            }
+        }
+
+        //расчёт по методам операции
         #region
-        private void CalculateResult2()
-        {
 
+        private void PlusMethod(int firstNum, int secondNum)
+        {
+            ResultValueLabel.Content = Convert.ToString(firstNum + secondNum, 10);
+            resultDoubleSystem.Content = Convert.ToString(firstNum + secondNum, 2);
         }
 
-        private void CalculateResult8()
+        private void MinusMethod(int firstNum, int secondNum)
         {
-
+            ResultValueLabel.Content = Convert.ToString(firstNum - secondNum, 10);
+            resultDoubleSystem.Content = Convert.ToString(firstNum - secondNum, 2);
         }
 
-        private void CalculateResult10()
+        private void MultiplicationMethod(int firstNum, int secondNum)
         {
-
+            ResultValueLabel.Content = Convert.ToString(firstNum * secondNum, 10);
+            resultDoubleSystem.Content = Convert.ToString(firstNum * secondNum, 2);
         }
-        private void CalculateResult16()
-        {
 
+        private void DivisionMethod(int firstNum, int secondNum)
+        {
+            ResultValueLabel.Content = Convert.ToString(firstNum / secondNum, 10);
+            resultDoubleSystem.Content = Convert.ToString(firstNum / secondNum, 2);
         }
         #endregion
-
     }
 }
