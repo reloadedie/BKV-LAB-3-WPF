@@ -25,58 +25,81 @@ namespace BKV_LAB_3_WPF
 
         private void Calculate(object sender, RoutedEventArgs e)
         {
-            if (firstNumInput.Text == null && secondNumInput.Text == null)
+            if (firstNumInput.Text == string.Empty | secondNumInput.Text == string.Empty)
             {
                 MessageBox.Show("Введите числа!");
             }
 
-            if (selectedTagAction != null)
+            else
             {
-                MessageBox.Show("Выберите действие!");
+                string _fnuminput = Convert.ToString(firstNumInput.Text);
+                string _snuminput = Convert.ToString(secondNumInput.Text);
+
+                string? _tagSystem = Convert.ToString(selectedTagSystem.Text);
+                string? _tagAction = Convert.ToString(selectedTagAction.Text);
+                ChekSystemOperation(_tagAction, _tagSystem, _fnuminput, _snuminput);
             }
-
-            int fnuminput = Convert.ToInt32(firstNumInput.Text);
-            int snuminput = Convert.ToInt32(secondNumInput.Text);
-
-            ReturnDoubleValue(fnuminput, snuminput);
-
-            string? _tagSystem = Convert.ToString(selectedTagSystem.Text);
-            string? _tagAction = Convert.ToString(selectedTagAction.Text);
-            ChekSystemOperation(_tagAction, _tagSystem, fnuminput, snuminput);
+            
         }
         
         private void ReturnDoubleValue(int firstNum, int secondNum)
         {
+            
             firstNumDouble.Content = Convert.ToString(firstNum, 2);
             secondNumDouble.Content = Convert.ToString(secondNum, 2);
         }
 
-        private void ChekSystemOperation(string _tagAction, string _tagSystem, int firstNum, int secondNum)
+        private void ChekSystemOperation(string _tagAction, string _tagSystem, string _firstNum, string _secondNum)
         {
-            int tagSystemInt;
-            switch (_tagSystem)
+            int tagSystemInt, fnum, snum;
+            try
             {
-                case "Двоичная":
-                    tagSystemInt = 2;
-                    CheckTypeOperation(_tagAction, tagSystemInt, firstNum, secondNum);
-                    break;
+                switch (_tagSystem)
+                {
+                    case "Двоичная":
+                        tagSystemInt = 2;
+                        //вот это всё в 1 метод для меньшего количества строчек продумать?? нужно вообще? работает - не трожь
 
-                case "Восьмиричная":
-                    tagSystemInt = 8;
-                    CheckTypeOperation(_tagAction, tagSystemInt, firstNum, secondNum);
-                    break;
+                        fnum = Convert.ToInt32(_firstNum, tagSystemInt);
+                        snum = Convert.ToInt32(_secondNum, tagSystemInt);
+                        ReturnDoubleValue(fnum, snum);
+                        CheckTypeOperation(_tagAction, tagSystemInt, fnum, snum);
+                        break;
 
-                case "Десятичная":
-                    tagSystemInt = 10;
-                    CheckTypeOperation(_tagAction, tagSystemInt, firstNum, secondNum);
-                    break;
+                    case "Восьмиричная":
+                        tagSystemInt = 8;
+                        fnum = Convert.ToInt32(_firstNum, tagSystemInt);
+                        snum = Convert.ToInt32(_secondNum, tagSystemInt);
+                        ReturnDoubleValue(fnum, snum);
+                        CheckTypeOperation(_tagAction, tagSystemInt, fnum, snum);
+                        break;
 
-                case "Шестнадцатиричная":
-                    tagSystemInt = 16;
-                    CheckTypeOperation(_tagAction, tagSystemInt, firstNum, secondNum);
-                    break;
+                    case "Десятичная":
+                        tagSystemInt = 10;
+                        fnum = Convert.ToInt32(_firstNum, tagSystemInt);
+                        snum = Convert.ToInt32(_secondNum, tagSystemInt);
+                        ReturnDoubleValue(fnum, snum);
+                        CheckTypeOperation(_tagAction, tagSystemInt, fnum, snum);
+                        break;
+
+                    case "Шестнадцатиричная":
+                        tagSystemInt = 16;
+                        fnum = Convert.ToInt32(_firstNum, tagSystemInt);
+                        snum = Convert.ToInt32(_secondNum, tagSystemInt);
+                        ReturnDoubleValue(fnum, snum);
+                        CheckTypeOperation(_tagAction, tagSystemInt, fnum, snum);
+                        break;
+                }
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show(ex.ToString(), "Ошибка!");
+            
+                MessageBox.Show("Попробуйте ввести число корректно");
+                //MessageBoxButton.YesNo
 
             }
+
         }
 
         private void CheckTypeOperation(string _tagAction, int tagSystemInt, int firstNum, int secondNum)
@@ -105,27 +128,36 @@ namespace BKV_LAB_3_WPF
         #region
         private void PlusMethod(int tagSystemInt, int firstNum, int secondNum)
         {
-            ResultValueLabel.Content = Convert.ToString(firstNum + secondNum, tagSystemInt);
+            ResultValueLabel.Content = Convert.ToString(firstNum + secondNum, tagSystemInt).ToUpper();
             resultDoubleSystem.Content = Convert.ToString(firstNum + secondNum, 2);
         }
 
         private void MinusMethod(int tagSystemInt, int firstNum, int secondNum)
         {
-            ResultValueLabel.Content = Convert.ToString(firstNum - secondNum, tagSystemInt);
+            ResultValueLabel.Content = Convert.ToString(firstNum - secondNum, tagSystemInt).ToUpper();
             resultDoubleSystem.Content = Convert.ToString(firstNum - secondNum, 2);
         }
 
         private void MultiplicationMethod(int tagSystemInt, int firstNum, int secondNum)
         {
-            ResultValueLabel.Content = Convert.ToString(firstNum * secondNum, tagSystemInt);
+            ResultValueLabel.Content = Convert.ToString(firstNum * secondNum, tagSystemInt).ToUpper();
             resultDoubleSystem.Content = Convert.ToString(firstNum * secondNum, 2);
         }
 
         private void DivisionMethod(int tagSystemInt, int firstNum, int secondNum)
         {
-            ResultValueLabel.Content = Convert.ToString(firstNum / secondNum, tagSystemInt);
-            resultDoubleSystem.Content = Convert.ToString(firstNum / secondNum, 2);
+            ResultValueLabel.Content = Convert.ToString(firstNum / secondNum, tagSystemInt).ToUpper();
+            resultDoubleSystem.Content = Convert.ToString(firstNum / secondNum, 2).ToUpper();
+
+            if (firstNum % secondNum == 0) 
+            {
+                ostatokDel.Content = "0";
+            }
+            else ostatokDel.Content = Convert.ToString(firstNum % secondNum, tagSystemInt).ToUpper();
+            
+
         }
+
         #endregion
     }
 }

@@ -50,7 +50,6 @@
         </Style>
     </Window.Resources>
     
-    
     <Grid Margin="10,50,10,50">
         <Grid.ColumnDefinitions>
             <ColumnDefinition />
@@ -65,8 +64,6 @@
                 <RowDefinition />
             </Grid.RowDefinitions>
 
-            
-            
             <StackPanel Grid.Row="0"
                         Height="190"
                         VerticalAlignment="Bottom">
@@ -80,14 +77,13 @@
                     <ComboBox x:Name="selectedTagAction">
 
                         <ComboBoxItem Content="Сложение"
-                                      Tag="21" />
+                                      Tag="21" 
+                                      IsSelected="True"/>
                         <ComboBoxItem Content="Вычитание"
                                       Tag="22" />
                         <ComboBoxItem Content="Умножение"
                                       Tag="23" />
                         <ComboBoxItem Content="Деление"
-                                      Tag="24" />
-                        <ComboBoxItem Content="Остаток от деления (%)"
                                       Tag="24" />
                     </ComboBox>
                 </StackPanel>
@@ -152,6 +148,14 @@
                               IsSelected="True"/>
                 <ComboBoxItem Content="Шестнадцатиричная" Tag="16" />
             </ComboBox>
+        </StackPanel>
+
+        <StackPanel Grid.Column="2"
+                    VerticalAlignment="Bottom"
+                    Margin="0,0,0,80">
+            <Label Content="Остаток от деления:" />
+            <Label x:Name="ostatokDel" Height="50" 
+                   FontWeight="Bold"/>
         </StackPanel>
     </Grid>
 </Window>
