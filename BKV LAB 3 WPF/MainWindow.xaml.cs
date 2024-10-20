@@ -25,6 +25,7 @@ namespace BKV_LAB_3_WPF
 
         private void Calculate(object sender, RoutedEventArgs e)
         {
+            OstatokDelStackPanel.Visibility = Visibility.Hidden;
             if (firstNumInput.Text == string.Empty | secondNumInput.Text == string.Empty)
             {
                 MessageBox.Show("Введите числа!");
@@ -93,11 +94,7 @@ namespace BKV_LAB_3_WPF
             }
             catch(Exception ex)
             {
-                MessageBox.Show(ex.ToString(), "Ошибка!");
-            
-                MessageBox.Show("Попробуйте ввести число корректно");
-                //MessageBoxButton.YesNo
-
+                MessageBox.Show(ex.ToString(), "Ошибка! Попробуйте ввести число корректно", MessageBoxButton.YesNo, MessageBoxImage.Error);
             }
 
         }
@@ -148,7 +145,7 @@ namespace BKV_LAB_3_WPF
         {
             ResultValueLabel.Content = Convert.ToString(firstNum / secondNum, tagSystemInt).ToUpper();
             resultDoubleSystem.Content = Convert.ToString(firstNum / secondNum, 2).ToUpper();
-
+            OstatokDelStackPanel.Visibility = Visibility.Visible;
             if (firstNum % secondNum == 0) 
             {
                 ostatokDel.Content = "0";

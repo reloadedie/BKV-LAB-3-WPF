@@ -152,7 +152,9 @@
 
         <StackPanel Grid.Column="2"
                     VerticalAlignment="Bottom"
-                    Margin="0,0,0,80">
+                    Margin="0,0,0,80"
+                    Visibility="Hidden"
+                    x:Name="OstatokDelStackPanel">
             <Label Content="Остаток от деления:" />
             <Label x:Name="ostatokDel" Height="50" 
                    FontWeight="Bold"/>
